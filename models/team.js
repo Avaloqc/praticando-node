@@ -1,4 +1,3 @@
-module.exports = mongoose.model('Standup', standupSchema)
 const mongoose = require('mongoose')
 
 const teamMemberSchema = new mongoose.Schema({
