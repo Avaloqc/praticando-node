@@ -3,7 +3,7 @@ const Project = require("../../models/projects")
 module.exports = function (router) {
     //GET: list of active projects
     router.get('/projects', function (req, res) {
-
+        
     })
 
     //POST: Create new Project ..

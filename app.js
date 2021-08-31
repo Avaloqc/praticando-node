@@ -1,4 +1,6 @@
 const express = require('express');
+const mongoose = require('mongoose');
+
 const app = express();
 const api = require('./api');
 
@@ -7,7 +9,6 @@ app.set('port', (process.env.PORT || 8081));
 app.use(express.json());
 app.use('/api', api);
 
-const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/virtualstandups', { useNewUrlParser: true })
 
 const db = mongoose.connection;
