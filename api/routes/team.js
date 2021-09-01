@@ -3,7 +3,7 @@ const TeamMember = require("../../models/team")
 module.exports = function (router) {
     //GET: list of team members
     router.get('/projects', function (req, res) {
-
+        
     })
 
     //POST: Create new TeamMember ..
