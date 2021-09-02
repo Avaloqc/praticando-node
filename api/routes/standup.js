@@ -5,6 +5,7 @@ module.exports = function (router) {
     router.get('/standup', function (req, res) {
         Standup.find()
             .sort({ 'createdOn': -1 })
+            .limit(12)
             .exec()
             .then(docs => res.status(200).json(docs))
             .catch(err => res.status(500).json({
@@ -14,7 +15,7 @@ module.exports = function (router) {
 
     })
 
-    //GET by id
+    //GET: stand-up meeting by ID
     router.get('/standup/:id', function (req, res) {
         Standup.findById(req.params.id)
             .sort({ 'createdOn': -1 })
@@ -27,7 +28,7 @@ module.exports = function (router) {
 
     })
 
-    //POST: Create new meeting note document ..
+    //POST: create new meeting note document
     router.post('/standup', function (req, res) {
         let note = new Standup(req.body)
         note.save(function (err, note) {
@@ -38,6 +39,7 @@ module.exports = function (router) {
         })
     })
 
+    //PUT: Update info
     router.put('/standup/:id', function (req, res) {
         Standup.findOneAndUpdate({ _id: req.params.id }, req.body)
             .exec()
@@ -47,7 +49,7 @@ module.exports = function (router) {
                 error: err
             }))
     })
-
+    //DELETE: Delete a satnd-up meeting
     router.delete('/standup/:id', function (req, res) {
         Standup.findOneAndDelete({ _id: req.params.id })
             .exec()
