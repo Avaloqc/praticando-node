@@ -2,12 +2,23 @@ const Standup = require("../../models/standup")
 
 module.exports = function (router) {
     //GET: the 12 newest stand-up meeting notes
-    router.get('/standup', function (req, res) {
+    router.get('/standup', (req, res) => {
         Standup.find()
             .sort({ 'createdOn': -1 })
             .limit(12)
             .exec()
-            .then(docs => res.status(200).json(docs))
+            .then(docs=>
+                {
+                //array of objects from the json of the database
+                arr = []
+                docs.forEach(element => {
+                    str = [element.teamMember, element.project, element.workYesterday, element.workToday, element.impediment, element.createdOn]
+                    arr.push(str)
+                });
+                //html string
+                let html = `<html><body><h1> Os meeting mas recentes: <br>${arr[0]} <br><br>${arr[1]}`
+                res.send(html)
+            })
             .catch(err => res.status(500).json({
                 message: 'Error finding standup meeting notes',
                 error: err

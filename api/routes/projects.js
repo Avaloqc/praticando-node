@@ -6,7 +6,7 @@ module.exports = function (router) {
         
     })
 
-    //POST: Create new Project ..
+    //POST: Create new project
     router.post('/projects', function (req, res) {
         let project = new Project(req.body)
         note.save(function (err, note) {
